@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CryptoPricePairBot.iml" filepath="$PROJECT_DIR$/.idea/CryptoPricePairBot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../PricePumpBot/.idea/PricePumpBot.iml" filepath="$PROJECT_DIR$/../PricePumpBot/.idea/PricePumpBot.iml" />
     </modules>
   </component>
 </project>

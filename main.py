@@ -2,7 +2,7 @@ import time
 
 import ccxt
 
-from telegram_notification import send_message_on_telegram
+from utils import get_price_pair
 
 # Initialize Poloniex API
 exchange = ccxt.poloniex()
@@ -15,32 +15,7 @@ symbol = f'{quote_pair}/{base_pair}'
 # Initialize the previous price
 previous_price = None
 
-
-def generate_chart_link(pair):
-    # Construct the trading pair symbol
-    symbol = pair.replace("/", "_")
-    # Generate the link to the live chart
-    chart_link = f'https://poloniex.com/trade/{symbol}'
-    return chart_link
-
-
-def send_notification(pair, increase_percentage):
-    """
-    send the  message to the user telegram which is being set on the .env
-    :param pair:
-    :param increase_percentage:
-    :return:
-    """
-    chart_link = generate_chart_link(pair)
-
-    message = f"Price pump detected for {pair}!\n" \
-              f"Increase Percentage: {increase_percentage:.2f}%\n" \
-              f"Chart Link: {chart_link}"
-
-    # send message for the pump
-    send_message_on_telegram(message)
-    return
-
+poloniex_trading_pairs = get_price_pair()
 
 while True:
     # Fetch ticker data for the crypto pair
