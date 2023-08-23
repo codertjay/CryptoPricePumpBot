@@ -4,22 +4,24 @@ from decouple import config
 from telegram_notification import send_message_on_telegram
 
 
-def get_price_pair():
+def get_futures_price_pairs():
     """
-    the base currency could change to any stable coin  notation
-    :return:
+    Fetch futures price pairs involving the specified stablecoin.
+    :return: List of futures price pairs
     """
     # Define the base currency you're interested in (USDT)
     base_currency = config("BASE_CURRENCY")
 
-    # Initialize Poloniex API
-    exchange = ccxt.poloniex()
+    # Initialize the exchange API
+    exchange = ccxt.poloniex({'option': {'defaultMarket': 'futures'}})
 
-    # Fetch the exchange markets
-    markets = exchange.load_markets()
-    # Find all pairs with USDT as the base or quote currency
-    usdt_pairs = [pair for pair, info in markets.items() if base_currency in info['symbol']]
-    return usdt_pairs
+    # Fetch the futures markets data
+    futures_markets = exchange.fetch_markets()
+
+    # Find futures pairs with USDT as the base or quote currency
+    usdt_futures_pairs = [market['symbol'] for market in futures_markets if base_currency in market['symbol']]
+
+    return usdt_futures_pairs
 
 
 def generate_chart_link(pair):
