@@ -1,3 +1,5 @@
+import asyncio
+
 import ccxt
 from decouple import config
 
@@ -6,7 +8,7 @@ from telegram_notification import send_message_on_telegram
 
 def get_futures_price_pairs():
     """
-    Fetch futures price pairs involving the specified stablecoin.
+    Fetch futures price pairs involving the specified stable coin.
     :return: List of futures price pairs
     """
     # Define the base currency you're interested in (USDT)
@@ -37,7 +39,7 @@ def generate_chart_link(pair):
     return chart_link
 
 
-def send_notification(pair, increase_percentage):
+def send_notification(pair, increase_percentage, previous_price, current_price, current_time, previous_time):
     """
     send the  message to the user telegram which is being set on the .env
     :param pair:
@@ -47,9 +49,13 @@ def send_notification(pair, increase_percentage):
     chart_link = generate_chart_link(pair)
 
     message = f"Price pump detected for {pair}!\n" \
+              f"Previous Price {previous_price} \n" \
+              f"Current Price {current_price} \n" \
+              f"Previous Time {previous_time} \n" \
+              f"Current Time {current_time} \n" \
               f"Increase Percentage: {increase_percentage:.2f}%\n" \
               f"Chart Link: {chart_link}"
 
     # send message for the pump
-    send_message_on_telegram(message)
+    asyncio.run(send_message_on_telegram(message))
     return
