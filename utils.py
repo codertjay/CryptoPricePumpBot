@@ -49,10 +49,10 @@ def send_notification(pair, increase_percentage, previous_price, current_price, 
     chart_link = generate_chart_link(pair)
 
     message = f"Price pump detected for {pair}!\n" \
-              f"Previous Price {previous_price} \n" \
               f"Current Price {current_price} \n" \
-              f"Previous Time {previous_time} \n" \
+              f"Previous Price {previous_price} \n" \
               f"Current Time {current_time} \n" \
+              f"Previous Time {previous_time} \n" \
               f"Increase Percentage: {increase_percentage:.2f}%\n" \
               f"Chart Link: {chart_link}"
 
