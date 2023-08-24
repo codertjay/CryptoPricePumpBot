@@ -8,11 +8,13 @@ from telegram_notification import send_message_on_telegram
 
 def get_futures_price_pairs():
     """
-    Fetch futures price pairs involving the specified stable coin.
+    Fetch futures price pairs involving the specified stable coin with a minimum 24-hour volume.
     :return: List of futures price pairs
     """
     # Define the base currency you're interested in (USDT)
     base_currency = config("BASE_CURRENCY")
+    # Minimum volume
+    min_volume = config("MINIMUM_VOLUME", cast=float, default=0)
 
     # Initialize the exchange API
     exchange = ccxt.poloniex({'option': {'defaultMarket': 'futures'}})
@@ -20,10 +22,25 @@ def get_futures_price_pairs():
     # Fetch the futures markets data
     futures_markets = exchange.fetch_markets()
 
-    # Find futures pairs with USDT as the base or quote currency
-    usdt_futures_pairs = [market['symbol'] for market in futures_markets if base_currency in market['symbol']]
+    # List to store relevant pairs
+    relevant_futures_pairs = []
 
-    return usdt_futures_pairs
+    print("Getting Market volume .... This could take some time")
+    # Fetch additional data for each relevant market (including volume)
+    for market in futures_markets:
+        if base_currency in market['symbol']:
+            market_id = market['id']
+            market_info = exchange.fetch_ticker(market_id)
+            market['baseVolume'] = market_info['baseVolume']  # Add baseVolume directly to market data
+            print(f"Market Volume for {market_id} is {market_info['baseVolume']}")
+
+            if float(market_info['baseVolume']) >= float(min_volume):
+                relevant_futures_pairs.append(market['symbol'])
+
+    print("================================================================")
+    print(f"Token that pass minimum volumes  {min_volume} are {len(relevant_futures_pairs)}")
+    print("================================================================")
+    return relevant_futures_pairs
 
 
 def generate_chart_link(pair):

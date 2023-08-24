@@ -66,5 +66,5 @@ while True:
 
     elapsed_time = end_time - start_time
     print(f"Elapsed time: {elapsed_time:.2f} seconds")
-    # sleep for five minute
-    time.sleep(config("SLEEP_TIME", cast=int, default=0) * 60)
+    # sleep for  minute
+    time.sleep(config("SLEEP_TIME", cast=int, default=0))

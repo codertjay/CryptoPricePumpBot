@@ -40,3 +40,48 @@
     'markPrice': '0.55769'
   }
 }
+
+
+
+{
+  'id': 'DASH_USDT',
+  'symbol': 'DASH/USDT',
+  'timestamp': 1692894565446,
+  'datetime': '2023-08-24T16:29:25.446Z',
+  'high': 27.04,
+  'low': 25.14,
+  'bid': None,
+  'bidVolume': None,
+  'ask': None,
+  'askVolume': None,
+  'vwap': 26.304349291017935,
+  'open': 26.5,
+  'close': 25.14,
+  'last': 25.14,
+  'previousClose': None,
+  'change': -1.36,
+  'percentage': -5.132075471698113,
+  'average': 25.82,
+  'baseVolume': 55.146388,
+  'quoteVolume': 1450.58985209,
+  'info': {
+    'symbol': 'DASH_USDT',
+    'open': '26.5',
+    'low': '25.14',
+    'high': '27.04',
+    'close': '25.14',
+    'quantity': '55.146388',
+    'amount': '1450.58985209',
+    'tradeCount': '53',
+    'startTime': '1692808140000',
+    'closeTime': '1692894558940',
+    'displayName': 'DASH/USDT',
+    'dailyChange': '-0.0513',
+    'bid': '25.13',
+    'bidQuantity': '4.925919',
+    'ask': '25.69',
+    'askQuantity': '8',
+    'ts': '1692894565446',
+    'markPrice': '25.2'
+  }
+}

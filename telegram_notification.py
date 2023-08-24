@@ -32,3 +32,4 @@ async def send_message_on_telegram(message):
     chat_id = config("TELEGRAM_CHAT_ID")
 
     await bot.send_message(chat_id=chat_id, text=message)
+
