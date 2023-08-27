@@ -85,3 +85,47 @@
     'markPrice': '25.2'
   }
 }
+{
+  'symbol': 'BTC/USDT',
+  'timestamp': 1693156400603,
+  'datetime': '2023-08-27T17:13:20.603Z',
+  'high': 26182.23,
+  'low': 25966.11,
+  'bid': 26166.35,
+  'bidVolume': 9.05229,
+  'ask': 26166.36,
+  'askVolume': 7.04965,
+  'vwap': 26063.64502731,
+  'open': 26029.77,
+  'close': 26166.35,
+  'last': 26166.35,
+  'previousClose': 26029.77,
+  'change': 136.58,
+  'percentage': 0.525,
+  'average': 26098.06,
+  'baseVolume': 11603.79059,
+  'quoteVolume': 302437078.9090131,
+  'info': {
+    'symbol': 'BTCUSDT',
+    'priceChange': '136.58000000',
+    'priceChangePercent': '0.525',
+    'weightedAvgPrice': '26063.64502731',
+    'prevClosePrice': '26029.77000000',
+    'lastPrice': '26166.35000000',
+    'lastQty': '0.00893000',
+    'bidPrice': '26166.35000000',
+    'bidQty': '9.05229000',
+    'askPrice': '26166.36000000',
+    'askQty': '7.04965000',
+    'openPrice': '26029.77000000',
+    'highPrice': '26182.23000000',
+    'lowPrice': '25966.11000000',
+    'volume': '11603.79059000',
+    'quoteVolume': '302437078.90901310',
+    'openTime': '1693070000603',
+    'closeTime': '1693156400603',
+    'firstId': '3199531612',
+    'lastId': '3199871525',
+    'count': '339914'
+  }
+}

@@ -1,6 +1,8 @@
 import asyncio
+import time
 
 import ccxt
+import requests
 from decouple import config
 
 from telegram_notification import send_message_on_telegram
@@ -20,26 +22,32 @@ def get_futures_price_pairs():
     exchange = ccxt.poloniex({'option': {'defaultMarket': 'futures'}})
 
     # Fetch the futures markets data
-    futures_markets = exchange.fetch_markets()
+    # futures_markets = exchange.fetch_markets()
+    response = requests.get("https://api.poloniex.com/markets/ticker24h")
+
+    if response.status_code != 200:
+        return
+    futures_markets = response.json()
 
     # List to store relevant pairs
     relevant_futures_pairs = []
 
     print("Getting Market volume .... This could take some time")
     # Fetch additional data for each relevant market (including volume)
-    for market in futures_markets:
-        if base_currency in market['symbol']:
-            market_id = market['id']
-            market_info = exchange.fetch_ticker(market_id)
-            market['baseVolume'] = market_info['baseVolume']  # Add baseVolume directly to market data
-            print(f"Market Volume for {market_id} is {market_info['baseVolume']}")
+    for market_info in futures_markets:
+        if base_currency in market_info['symbol']:
+            market_id = market_info['symbol']
+            # market_info = exchange.fetch_ticker(market_id)
+            market_info['amount'] = market_info['amount']  # Add quoteVolume directly to market data
+            print(f"Market Volume for {market_id} is {market_info['amount']}")
 
-            if float(market_info['baseVolume']) >= float(min_volume):
-                relevant_futures_pairs.append(market['symbol'])
+            if float(market_info['amount']) >= float(min_volume):
+                relevant_futures_pairs.append(market_info['displayName'])
 
     print("================================================================")
     print(f"Token that pass minimum volumes  {min_volume} are {len(relevant_futures_pairs)}")
     print("================================================================")
+    time.sleep(3)
     return relevant_futures_pairs
 
 
