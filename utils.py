@@ -41,7 +41,7 @@ def get_futures_price_pairs():
             market_info['amount'] = market_info['amount']  # Add quoteVolume directly to market data
             print(f"Market Volume for {market_id} is {market_info['amount']}")
 
-            if float(market_info['amount']) >= float(min_volume):
+            if float(market_info['amount']) <= float(min_volume):
                 relevant_futures_pairs.append(market_info['displayName'])
 
     print("================================================================")
